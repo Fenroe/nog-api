@@ -2,14 +2,16 @@ import { Controller, Get, Post, Body, Put, Param, Delete, NotFoundException } fr
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateCredentialDto } from 'src/credentials/dto/update-credential.dto';
+import { CreateCredentialDto } from 'src/credentials/dto/create-credential.dto';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  async create(@Body() createUserDto: CreateUserDto) {
-    return await this.usersService.create(createUserDto);
+  async create(@Body() createUserDto: CreateUserDto, @Body() createCredentialDto: CreateCredentialDto) {
+    return await this.usersService.create(createUserDto, createCredentialDto);
   }
 
   @Get()
