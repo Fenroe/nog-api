@@ -2,16 +2,14 @@ import { Controller, Get, Post, Body, Put, Param, Delete, NotFoundException } fr
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UpdateCredentialDto } from 'src/credentials/dto/update-credential.dto';
-import { CreateCredentialDto } from 'src/credentials/dto/create-credential.dto';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  async create(@Body() createUserDto: CreateUserDto, @Body() createCredentialDto: CreateCredentialDto) {
-    return await this.usersService.create(createUserDto, createCredentialDto);
+  async create(@Body() createUserDto: CreateUserDto) {
+    return await this.usersService.create(createUserDto);
   }
 
   @Get()
@@ -31,11 +29,6 @@ export class UsersController {
   @Put(':id')
   async update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return await this.usersService.update(+id, updateUserDto);
-  }
-
-  @Put('/credentials/:id')
-  async updateCredentials(@Param('id') id: string, @Body() updateCredentialDto: UpdateCredentialDto) {
-    return await this.usersService.updateCredentials(+id, updateCredentialDto);
   }
 
   @Delete(':id')

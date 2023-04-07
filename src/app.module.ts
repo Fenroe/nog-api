@@ -5,7 +5,7 @@ import { RemindersModule } from './reminders/reminders.module';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CredentialsModule } from './credentials/credentials.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -22,7 +22,7 @@ import { CredentialsModule } from './credentials/credentials.module';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true
     }),
-    CredentialsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
