@@ -5,7 +5,6 @@ import { RemindersModule } from './reminders/reminders.module';
 import { UsersModule } from './users/users.module';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,10 +18,8 @@ import { AuthModule } from './auth/auth.module';
       username: process.env.PG_USER,
       password: process.env.PG_PASSWORD,
       database: process.env.PG_DB,
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
-      synchronize: true
+      entities: [__dirname + '/**/*.entity{.ts,.js}']
     }),
-    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

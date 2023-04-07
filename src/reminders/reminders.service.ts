@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateReminderDto } from './dto/create-reminder.dto';
 import { UpdateReminderDto } from './dto/update-reminder.dto';
 import { Reminder } from './entities/reminder.entity';
@@ -24,7 +24,7 @@ export class RemindersService {
   async findOne(id: number): Promise<Reminder> {
     const reminder = await this.reminderRepository.findOne({ where: { id } });
     if (reminder === null) {
-      throw new Error();
+      throw new NotFoundException();
     }
     return reminder;
   }

@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "src/users/entities/user.entity";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Reminder {
@@ -11,6 +12,21 @@ export class Reminder {
     @Column()
     message: string;
 
+    @CreateDateColumn()
+    createdOn: Date;
+
     @Column()
-    date: Date;
+    eventDate: Date;
+
+    @Column()
+    remindOn: Date;
+
+    @Column()
+    discordServerId: string;
+
+    @Column()
+    recursOn: string;
+
+    @ManyToOne(type => User)
+    user: User;
 }

@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Put, Param, Delete, NotFoundException } fr
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { SignInDto } from './dto/sign-in.dto';
 
 @Controller('users')
 export class UsersController {
@@ -12,6 +13,11 @@ export class UsersController {
     return await this.usersService.create(createUserDto);
   }
 
+  @Post('login')
+  async login(@Body() signInDto: SignInDto) {
+    return await this.usersService.signIn(signInDto)
+  }
+
   @Get()
   async findAll() {
     return await this.usersService.findAll();
@@ -19,11 +25,7 @@ export class UsersController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    try {
-      return await this.usersService.findOne(+id);
-    } catch(err) {
-      throw new NotFoundException();
-    }
+    return await this.usersService.findOne(+id);
   }
 
   @Put(':id')

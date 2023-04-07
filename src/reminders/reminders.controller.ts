@@ -19,11 +19,7 @@ export class RemindersController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    try {
-      return await this.remindersService.findOne(+id);
-    } catch(err) {
-      throw new NotFoundException();
-    }
+    return await this.remindersService.findOne(+id);
   }
 
   @Put(':id')
